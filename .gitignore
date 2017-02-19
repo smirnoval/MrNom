@@ -13,8 +13,15 @@ bin/
 gen/
 out/
 
+# Android Studio files
+.idea/
+gradlew
+gradlew.bat
+settings.gradle
+
 # Gradle files
 .gradle/
+
 build/
 
 # Local configuration file (sdk path, etc)
@@ -38,3 +45,7 @@ captures/
 
 # Keystore files
 *.jks
+*.properties
+MrNom/gradle/wrapper/gradle-wrapper.jar
+*.gradle
+MrNom/app/proguard-rules.pro
