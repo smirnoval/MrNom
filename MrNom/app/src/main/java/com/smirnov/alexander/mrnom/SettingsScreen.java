@@ -6,12 +6,13 @@ import com.smirnov.alexander.framework.Game;
 import com.smirnov.alexander.framework.Graphics;
 import com.smirnov.alexander.framework.Input.TouchEvent;
 import com.smirnov.alexander.framework.Screen;
+import com.smirnov.alexander.framework.impl.AndroidMusic;
 
 public class SettingsScreen extends Screen {
+    public static boolean showFps = false;
+
     public SettingsScreen(Game game) {
         super(game);
-        Assets.musicSettings.setVolume(1);
-        Assets.musicSettings.setLooping(true);
         Assets.musicSettings.play();
     }
 
@@ -28,10 +29,43 @@ public class SettingsScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(event.x > 512 && event.y > 820 ) {
-                    game.setScreen(new MainMenuScreen(game));
-                    Assets.click.play(1);
+                if(event.x > 500 && event.y < 128 ) {
+                    Assets.click.play();
                     Assets.musicSettings.stop();
+                    game.setScreen(new MainMenuScreen(game));
+                    return;
+                }
+                if(event.x > 250 && event.y > 240 && event.x < 390 && event.y < 370 ) {
+                    Assets.click.play();
+                    showFps = !showFps;
+                    return;
+                }
+                if(event.x > 50 && event.y > 500 && event.x < 190 && event.y < 630 ) {
+                    Assets.click.play();
+                    float volume = Assets.musicSettings.getVolume();
+                    if (volume < 1)
+                        Assets.musicSettings.setVolume(volume+0.1f);
+                    return;
+                }
+                if(event.x > 450 && event.y > 500 && event.x < 600 && event.y < 630 ) {
+                    Assets.click.play();
+                    float volume = Assets.musicSettings.getVolume();
+                    if (volume > 0.1f)
+                        Assets.musicSettings.setVolume(volume-0.1f);
+                    return;
+                }
+                if(event.x > 50 && event.y > 750 && event.x < 190 && event.y < 880 ) {
+                    Assets.click.play();
+                    float volume = Assets.click.getVolume();
+                    if (volume < 1)
+                        Assets.click.setVolume(volume+0.1f);
+                    return;
+                }
+                if(event.x > 450 && event.y > 750 && event.x < 600 && event.y < 880 ) {
+                    Assets.click.play();
+                    float volume = Assets.click.getVolume();
+                    if (volume > 0.1f)
+                        Assets.click.setVolume(volume-0.1f);
                     return;
                 }
             }
@@ -40,10 +74,25 @@ public class SettingsScreen extends Screen {
 
     @Override
     public void present(float deltaTime) {
+        String musicVolume = String.format("%.1f", Assets.musicSettings.getVolume());
+        String soundVolume = String.format("%.1f", Assets.click.getVolume());
         Graphics g = game.getGraphics();
         g.drawPixmap(Assets.background, 0, 0);
-        g.drawPixmap(Assets.settingsscreen, 128, 200);
-        g.drawPixmap(Assets.buttons, 512, 820, 0, 128, 128, 128);
+        g.drawPixmap(Assets.mainMenu, 130, 40, 0, 200, 400, 100);
+        g.drawPixmap(Assets.buttons, 500, 0, 0, 128, 128, 128);
+        g.drawPixmap(Assets.settingsMenu, 120, 140, 0, 0, 400, 110);
+        if(showFps)
+            g.drawPixmap(Assets.fpsOn, 250, 240);
+        else
+            g.drawPixmap(Assets.fpsOff, 250, 240);
+        g.drawPixmap(Assets.settingsMenu, 120, 400, 0, 110, 400, 100);
+        g.drawPixmap(Assets.plus, 50, 500);
+        g.drawPixmap(Assets.minus, 450, 500);
+        g.drawText(g, Assets.numbers, musicVolume, 250, 530);
+        g.drawPixmap(Assets.settingsMenu, 120, 650, 0, 200, 400, 100);
+        g.drawPixmap(Assets.plus, 50, 750);
+        g.drawPixmap(Assets.minus, 450, 750);
+        g.drawText(g, Assets.numbers, soundVolume, 250, 780);
     }
 
     @Override

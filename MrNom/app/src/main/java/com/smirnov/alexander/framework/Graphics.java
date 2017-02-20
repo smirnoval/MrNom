@@ -24,4 +24,5 @@ public interface Graphics {
 
     public int getHeight();
 
+    public void drawText(Graphics g, Pixmap text, String line, int x, int y);
 }
