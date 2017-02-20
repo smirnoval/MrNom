@@ -36,9 +36,9 @@ public abstract class AndroidGame extends Activity implements Game {
 
         boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         //int frameBufferWidth = isLandscape ? 420 : 380;
-        int frameBufferWidth = 320;
+        int frameBufferWidth = 640;
         //int frameBufferHeight = isLandscape ? 380 : 420;
-        int frameBufferHeight = 500;
+        int frameBufferHeight = 960;
         Bitmap frameBuffer = Bitmap.createBitmap(frameBufferWidth,
                 frameBufferHeight, Config.RGB_565);
 

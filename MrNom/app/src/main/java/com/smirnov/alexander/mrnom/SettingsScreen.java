@@ -30,7 +30,7 @@ public class SettingsScreen extends Screen {
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
-                if(event.x > 256 && event.y > 416 ) {
+                if(event.x > 512 && event.y > 820 ) {
                     game.setScreen(new MainMenuScreen(game));
                     if(Settings.soundEnabled){
                         Assets.click.play(1);
@@ -46,8 +46,8 @@ public class SettingsScreen extends Screen {
     public void present(float deltaTime) {
         Graphics g = game.getGraphics();
         g.drawPixmap(Assets.background, 0, 0);
-        g.drawPixmap(Assets.settingsscreen, 64, 100);
-        g.drawPixmap(Assets.buttons, 256, 416, 0, 64, 64, 64);
+        g.drawPixmap(Assets.settingsscreen, 128, 200);
+        g.drawPixmap(Assets.buttons, 512, 820, 0, 128, 128, 128);
     }
 
     @Override
