@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MrNomGame"
-            android:configChanges="keyboard|keyboardHidden|orientation">
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
