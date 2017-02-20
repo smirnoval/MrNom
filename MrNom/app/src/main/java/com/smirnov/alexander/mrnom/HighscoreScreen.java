@@ -1,5 +1,7 @@
 package com.smirnov.alexander.mrnom;
 
+import android.graphics.Color;
+
 import java.util.List;
 
 import com.smirnov.alexander.framework.Game;
@@ -48,6 +50,8 @@ public class HighscoreScreen extends Screen {
 
         g.drawPixmap(Assets.background, 0, 0);
         g.drawPixmap(Assets.mainMenu, 140, 40, 0, 110, 400, 100);
+        if(Settings.showFPS)
+            g.drawDebugText(20, 20, Color.BLACK, String.format("FPS: %.0f", 1/deltaTime));
 
         int y = 200;
         for (int i = 0; i < 5; i++) {

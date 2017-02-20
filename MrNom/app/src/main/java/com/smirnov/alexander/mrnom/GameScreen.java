@@ -129,6 +129,8 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.background, 0, 0);
+        if(Settings.showFPS)
+            g.drawDebugText(20, 20, Color.BLACK, String.format("FPS: %.0f", 1/deltaTime));
         drawWorld(world);
         if(state == GameState.Ready)
             drawReadyUI();

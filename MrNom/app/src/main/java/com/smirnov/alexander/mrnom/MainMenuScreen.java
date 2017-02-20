@@ -1,5 +1,7 @@
 package com.smirnov.alexander.mrnom;
 
+import android.graphics.Color;
+
 import java.util.List;
 
 import com.smirnov.alexander.framework.Game;
@@ -71,6 +73,8 @@ public class MainMenuScreen extends Screen {
             g.drawPixmap(Assets.buttons, 0, 820, 0, 0, 128, 128);
         else
             g.drawPixmap(Assets.buttons, 0, 820, 128, 0, 128, 128);
+        if(Settings.showFPS)
+            g.drawDebugText(20, 20, Color.BLACK, String.format("FPS: %.0f", 1/deltaTime));
     }
 
     public void pause() {

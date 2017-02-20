@@ -25,4 +25,6 @@ public interface Graphics {
     public int getHeight();
 
     public void drawText(Graphics g, Pixmap text, String line, int x, int y);
+
+    public void drawDebugText(float x, float y, int color, String text);
 }

@@ -1,5 +1,7 @@
 package com.smirnov.alexander.mrnom;
 
+import android.graphics.Color;
+
 import java.util.List;
 
 import com.smirnov.alexander.framework.Game;
@@ -9,7 +11,6 @@ import com.smirnov.alexander.framework.Screen;
 import com.smirnov.alexander.framework.impl.AndroidMusic;
 
 public class SettingsScreen extends Screen {
-    public static boolean showFps = false;
 
     public SettingsScreen(Game game) {
         super(game);
@@ -37,7 +38,7 @@ public class SettingsScreen extends Screen {
                 }
                 if(event.x > 250 && event.y > 240 && event.x < 390 && event.y < 370 ) {
                     Assets.click.play();
-                    showFps = !showFps;
+                    Settings.showFPS = !Settings.showFPS;
                     return;
                 }
                 if(event.x > 50 && event.y > 500 && event.x < 190 && event.y < 630 ) {
@@ -81,8 +82,10 @@ public class SettingsScreen extends Screen {
         g.drawPixmap(Assets.mainMenu, 130, 40, 0, 200, 400, 100);
         g.drawPixmap(Assets.buttons, 500, 0, 0, 128, 128, 128);
         g.drawPixmap(Assets.settingsMenu, 120, 140, 0, 0, 400, 110);
-        if(showFps)
+        if(Settings.showFPS) {
             g.drawPixmap(Assets.fpsOn, 250, 240);
+            g.drawDebugText(20, 20, Color.BLACK, String.format("FPS: %.0f", 1/deltaTime));
+        }
         else
             g.drawPixmap(Assets.fpsOff, 250, 240);
         g.drawPixmap(Assets.settingsMenu, 120, 400, 0, 110, 400, 100);

@@ -87,6 +87,11 @@ public class AndroidGraphics implements Graphics {
         paint.setStyle(Style.FILL);
         canvas.drawRect(x, y, x + width - 1, y + width - 1, paint);
     }
+    public void drawDebugText(float x, float y, int color, String text) {
+        paint.setColor(color);
+        paint.setStyle(Style.FILL);
+        canvas.drawText(text, x, y, paint);
+    }
     public void drawPixmap(Pixmap pixmap, int x, int y, int srcX, int srcY,
                            int srcWidth, int srcHeight) {
         srcRect.left = srcX;
@@ -124,7 +129,7 @@ public class AndroidGraphics implements Graphics {
 
             int srcX = 0;
             int srcWidth = 0;
-            if (character == ',') {
+            if (character == ',' || character == '.') {
                 srcX = 400;
                 srcWidth = 20;
             } else {
