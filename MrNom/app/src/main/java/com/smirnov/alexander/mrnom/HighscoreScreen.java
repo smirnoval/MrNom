@@ -12,8 +12,6 @@ public class HighscoreScreen extends Screen {
 
     public HighscoreScreen(Game game) {
         super(game);
-        Assets.musicHighscore.setVolume(1);
-        Assets.musicHighscore.setLooping(true);
         Assets.musicHighscore.play();
 
         for (int i = 0; i < 5; i++) {
@@ -35,7 +33,7 @@ public class HighscoreScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
                 if (event.x < 128 && event.y > 820) {
-                    Assets.click.play(1);
+                    Assets.click.play();
                     Assets.musicHighscore.stop();
                     game.setScreen(new MainMenuScreen(game));
                     return;
@@ -53,36 +51,11 @@ public class HighscoreScreen extends Screen {
 
         int y = 200;
         for (int i = 0; i < 5; i++) {
-            drawText(g, lines[i], 30, y);
+            g.drawText(g, Assets.numbers, lines[i], 30, y);
             y += 100;
         }
 
         g.drawPixmap(Assets.buttons, 0, 820, 128, 128, 128, 128);
-    }
-
-    public void drawText(Graphics g, String line, int x, int y) {
-        int len = line.length();
-        for (int i = 0; i < len; i++) {
-            char character = line.charAt(i);
-
-            if (character == ' ') {
-                x += 40;
-                continue;
-            }
-
-            int srcX = 0;
-            int srcWidth = 0;
-            if (character == '.') {
-                srcX = 400;
-                srcWidth = 20;
-            } else {
-                srcX = (character - '0') * 40;
-                srcWidth = 40;
-            }
-
-            g.drawPixmap(Assets.numbers, x, y, srcX, 0, srcWidth, 70);
-            x += srcWidth;
-        }
     }
 
     @Override

@@ -9,7 +9,11 @@ public class Assets {
     public static Pixmap logo;
     public static Pixmap mainMenu;
     public static Pixmap buttons;
-    public static Pixmap settingsscreen;
+    public static Pixmap settingsMenu;
+    public static Pixmap fpsOff;
+    public static Pixmap fpsOn;
+    public static Pixmap plus;
+    public static Pixmap minus;
     public static Pixmap numbers;
     public static Pixmap ready;
     public static Pixmap pause;

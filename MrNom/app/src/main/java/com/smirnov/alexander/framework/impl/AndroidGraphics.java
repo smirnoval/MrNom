@@ -111,5 +111,30 @@ public class AndroidGraphics implements Graphics {
     public int getHeight() {
         return frameBuffer.getHeight();
     }
+
+    public void drawText(Graphics g, Pixmap text, String line, int x, int y) {
+        int len = line.length();
+        for (int i = 0; i < len; i++) {
+            char character = line.charAt(i);
+
+            if (character == ' ') {
+                x += 40;
+                continue;
+            }
+
+            int srcX = 0;
+            int srcWidth = 0;
+            if (character == ',') {
+                srcX = 400;
+                srcWidth = 20;
+            } else {
+                srcX = (character - '0') * 40;
+                srcWidth = 40;
+            }
+
+            g.drawPixmap(text, x, y, srcX, 0, srcWidth, 70);
+            x += srcWidth;
+        }
+    }
 }
 

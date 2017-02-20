@@ -16,7 +16,11 @@ public class LoadingScreen extends Screen {
         Assets.logo = g.newPixmap("logo.png", PixmapFormat.ARGB4444);
         Assets.mainMenu = g.newPixmap("mainmenu.png", PixmapFormat.ARGB4444);
         Assets.buttons = g.newPixmap("buttons.png", PixmapFormat.ARGB4444);
-        Assets.settingsscreen = g.newPixmap("settingsscreen.png", PixmapFormat.ARGB4444);
+        Assets.settingsMenu = g.newPixmap("settingsmenu.png", PixmapFormat.ARGB4444);
+        Assets.fpsOff = g.newPixmap("fpsOff.png", PixmapFormat.ARGB4444);
+        Assets.fpsOn = g.newPixmap("fpsOn.png", PixmapFormat.ARGB4444);
+        Assets.plus = g.newPixmap("plus.png", PixmapFormat.ARGB4444);
+        Assets.minus = g.newPixmap("minus.png", PixmapFormat.ARGB4444);
         Assets.numbers = g.newPixmap("numbers.png", PixmapFormat.ARGB4444);
         Assets.ready = g.newPixmap("ready.png", PixmapFormat.ARGB4444);
         Assets.pause = g.newPixmap("pausemenu.png", PixmapFormat.ARGB4444);

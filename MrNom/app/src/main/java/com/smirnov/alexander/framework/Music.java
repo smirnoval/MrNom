@@ -15,6 +15,8 @@ public interface Music {
 
     public void setMute(boolean isMute);
 
+    public float getVolume();
+
     public boolean isPlaying();
 
     public boolean isStopped();

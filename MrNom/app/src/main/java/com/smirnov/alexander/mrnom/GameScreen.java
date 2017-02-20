@@ -24,8 +24,6 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) {
         super(game);
         world = new World();
-        Assets.musicGame.setVolume(1);
-        Assets.musicGame.setLooping(true);
         Assets.musicGame.play();
     }
 
@@ -59,7 +57,7 @@ public class GameScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x < 128 && event.y < 128) {
-                    Assets.click.play(1);
+                    Assets.click.play();
                     state = GameState.Paused;
                     return;
                 }
@@ -76,13 +74,13 @@ public class GameScreen extends Screen {
 
         world.update(deltaTime);
         if(world.gameOver) {
-            Assets.bitten.play(1);
+            Assets.bitten.play();
             state = GameState.GameOver;
         }
         if(oldScore != world.score) {
             oldScore = world.score;
             score = "" + oldScore;
-            Assets.eat.play(1);
+            Assets.eat.play();
         }
     }
 
@@ -94,13 +92,13 @@ public class GameScreen extends Screen {
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x > 160 && event.x <= 480) {
                     if(event.y > 200 && event.y <= 300) {
-                        Assets.click.play(1);
+                        Assets.click.play();
                         Assets.musicGame.play();
                         state = GameState.Running;
                         return;
                     }
                     if(event.y > 310 && event.y < 400) {
-                        Assets.click.play(1);
+                        Assets.click.play();
                         Assets.musicGame.stop();
                         game.setScreen(new MainMenuScreen(game));
                         return;
@@ -117,7 +115,7 @@ public class GameScreen extends Screen {
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x >= 256 && event.x <= 384 &&
                         event.y >= 400 && event.y <= 528) {
-                    Assets.click.play(1);
+                    Assets.click.play();
                     Assets.musicGame.stop();
                     game.setScreen(new MainMenuScreen(game));
                     return;

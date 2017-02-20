@@ -12,6 +12,8 @@ public class AndroidMusic implements Music, OnCompletionListener {
     MediaPlayer mediaPlayer;
     boolean isPrepared = false;
     static boolean mute = false;
+    static float musicVolume = 1;
+
     public AndroidMusic(AssetFileDescriptor assetDescriptor) {
         mediaPlayer = new MediaPlayer();
         try {
@@ -21,6 +23,7 @@ public class AndroidMusic implements Music, OnCompletionListener {
             mediaPlayer.prepare();
             isPrepared = true;
             mediaPlayer.setOnCompletionListener(this);
+            this.setLooping(true);
         } catch (Exception e) {
             throw new RuntimeException("Couldn't load music");
         }
@@ -30,6 +33,10 @@ public class AndroidMusic implements Music, OnCompletionListener {
         if (mediaPlayer.isPlaying())
             mediaPlayer.stop();
         mediaPlayer.release();
+    }
+
+    public float getVolume() {
+        return AndroidMusic.musicVolume;
     }
 
     public boolean isMute() {
@@ -65,6 +72,7 @@ public class AndroidMusic implements Music, OnCompletionListener {
             synchronized (this) {
                 if (!isPrepared)
                     mediaPlayer.prepare();
+                this.setVolume(musicVolume);
                 mediaPlayer.start();
             }
         } catch (IllegalStateException e) {
@@ -78,6 +86,7 @@ public class AndroidMusic implements Music, OnCompletionListener {
     }
 
     public void setVolume(float volume) {
+        AndroidMusic.musicVolume = volume;
         mediaPlayer.setVolume(volume, volume);
     }
 

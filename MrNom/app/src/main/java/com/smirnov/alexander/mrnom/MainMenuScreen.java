@@ -10,8 +10,6 @@ import com.smirnov.alexander.framework.Screen;
 public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
         super(game);
-        Assets.musicMainMenu.setVolume(1);
-        Assets.musicMainMenu.setLooping(true);
         Assets.musicMainMenu.play();
     }
 
@@ -31,23 +29,23 @@ public class MainMenuScreen extends Screen {
                     Settings.soundEnabled = !Settings.soundEnabled;
                     Assets.click.setMute(!Assets.click.isMute());
                     Assets.musicMainMenu.setMute(!Assets.musicMainMenu.isMute());
-                    Assets.click.play(1);
+                    Assets.click.play();
                 }
                 if(inBounds(event, 128, 440, 384, 84) ) {
                     game.setScreen(new GameScreen(game));
-                    Assets.click.play(1);
+                    Assets.click.play();
                     Assets.musicMainMenu.reset();
                     return;
                 }
                 if(inBounds(event, 128, 440 + 82, 384, 84) ) {
                     game.setScreen(new HighscoreScreen(game));
-                    Assets.click.play(1);
+                    Assets.click.play();
                     Assets.musicMainMenu.reset();
                     return;
                 }
                 if(inBounds(event, 128, 440 + 180, 384, 90) ) {
                     game.setScreen(new SettingsScreen(game));
-                    Assets.click.play(1);
+                    Assets.click.play();
                     Assets.musicMainMenu.reset();
                     return;
                 }
