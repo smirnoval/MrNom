@@ -79,7 +79,7 @@ public class SettingsScreen extends Screen {
         String soundVolume = String.format("%.1f", Assets.click.getVolume());
         Graphics g = game.getGraphics();
         g.drawPixmap(Assets.background, 0, 0);
-        g.drawPixmap(Assets.mainMenu, 130, 40, 0, 200, 400, 100);
+        g.drawPixmap(Assets.mainMenu, 130, 40, 0, 270, 400, 100);
         g.drawPixmap(Assets.buttons, 500, 0, 0, 128, 128, 128);
         g.drawPixmap(Assets.settingsMenu, 120, 140, 0, 0, 400, 110);
         if(Settings.showFPS) {

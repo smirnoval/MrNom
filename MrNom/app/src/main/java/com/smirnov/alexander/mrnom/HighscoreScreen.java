@@ -49,7 +49,7 @@ public class HighscoreScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.background, 0, 0);
-        g.drawPixmap(Assets.mainMenu, 140, 40, 0, 110, 400, 100);
+        g.drawPixmap(Assets.mainMenu, 140, 40, 0, 170, 400, 100);
         if(Settings.showFPS)
             g.drawDebugText(20, 20, Color.BLACK, String.format("FPS: %.0f", 1/deltaTime));
 

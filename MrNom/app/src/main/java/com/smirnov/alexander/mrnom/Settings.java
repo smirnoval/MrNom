@@ -10,6 +10,7 @@ import com.smirnov.alexander.framework.FileIO;
 public class Settings {
     public static boolean soundEnabled = true;
     public static boolean showFPS = false;
+    public static boolean enableWalls = false;
     public static int[] highscores = new int[] { 100, 80, 50, 30, 10 };
 
     public static void load(FileIO files) {

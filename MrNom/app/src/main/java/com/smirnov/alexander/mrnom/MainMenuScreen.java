@@ -34,18 +34,26 @@ public class MainMenuScreen extends Screen {
                     Assets.click.play();
                 }
                 if(inBounds(event, 128, 440, 384, 84) ) {
+                    Settings.enableWalls = false;
                     game.setScreen(new GameScreen(game));
                     Assets.click.play();
                     Assets.musicMainMenu.reset();
                     return;
                 }
-                if(inBounds(event, 128, 440 + 82, 384, 84) ) {
+                if(inBounds(event, 128, 440 + 82, 384, 90) ) {
+                    Settings.enableWalls = true;
+                    game.setScreen(new GameScreen(game));
+                    Assets.click.play();
+                    Assets.musicMainMenu.reset();
+                    return;
+                }
+                if(inBounds(event, 128, 440 + 180, 384, 84) ) {
                     game.setScreen(new HighscoreScreen(game));
                     Assets.click.play();
                     Assets.musicMainMenu.reset();
                     return;
                 }
-                if(inBounds(event, 128, 440 + 180, 384, 90) ) {
+                if(inBounds(event, 128, 440 + 260, 384, 90) ) {
                     game.setScreen(new SettingsScreen(game));
                     Assets.click.play();
                     Assets.musicMainMenu.reset();

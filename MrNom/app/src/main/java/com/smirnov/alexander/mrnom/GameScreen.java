@@ -188,14 +188,24 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.ready, 100, 200);
-        g.drawLine(0, 830, 960, 830, Color.BLACK);
+        if (Settings.enableWalls) {
+            g.drawLine(2, 2, 2, 830, Color.BLACK);
+            g.drawLine(2, 2, 637, 2, Color.BLACK);
+            g.drawLine(638, 2, 637, 830, Color.BLACK);
+        }
+        g.drawLine(0, 830, 640, 830, Color.BLACK);
     }
 
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.buttons, 0, 0, 128, 256, 128, 128);
-        g.drawLine(0, 830, 960, 830, Color.BLACK);
+        if (Settings.enableWalls) {
+            g.drawLine(2, 2, 2, 830, Color.BLACK);
+            g.drawLine(2, 2, 637, 2, Color.BLACK);
+            g.drawLine(638, 2, 637, 830, Color.BLACK);
+        }
+        g.drawLine(0, 830, 640, 830, Color.BLACK);
         g.drawPixmap(Assets.buttons, 0, 832, 128, 128, 128, 128);
         g.drawPixmap(Assets.buttons, 512, 832, 0, 128, 128, 128);
     }
@@ -204,7 +214,12 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawPixmap(Assets.pause, 160, 200);
-        g.drawLine(0, 830, 960, 830, Color.BLACK);
+        if (Settings.enableWalls) {
+            g.drawLine(2, 2, 2, 830, Color.BLACK);
+            g.drawLine(2, 2, 637, 2, Color.BLACK);
+            g.drawLine(638, 2, 637, 830, Color.BLACK);
+        }
+        g.drawLine(0, 830, 640, 830, Color.BLACK);
     }
 
     private void drawGameOverUI() {
@@ -212,7 +227,12 @@ public class GameScreen extends Screen {
 
         g.drawPixmap(Assets.gameOver, 124, 200);
         g.drawPixmap(Assets.buttons, 256, 400, 0, 256, 128, 128);
-        g.drawLine(0, 830, 960, 830, Color.BLACK);
+        if (Settings.enableWalls) {
+            g.drawLine(2, 2, 2, 830, Color.BLACK);
+            g.drawLine(2, 2, 637, 2, Color.BLACK);
+            g.drawLine(638, 2, 637, 830, Color.BLACK);
+        }
+        g.drawLine(0, 830, 640, 830, Color.BLACK);
     }
 
     public void drawText(Graphics g, String line, int x, int y) {

@@ -67,6 +67,10 @@ public class World {
                 gameOver = true;
                 return;
             }
+            if (Settings.enableWalls && snake.checkEatenWalls()) {
+                gameOver = true;
+                return;
+            }
 
             SnakePart head = snake.parts.get(0);
             if (head.x == stain.x && head.y == stain.y) {
