@@ -11,6 +11,7 @@ import com.smirnov.alexander.framework.Music;
 public class AndroidMusic implements Music, OnCompletionListener {
     MediaPlayer mediaPlayer;
     boolean isPrepared = false;
+    static boolean mute = false;
     public AndroidMusic(AssetFileDescriptor assetDescriptor) {
         mediaPlayer = new MediaPlayer();
         try {
@@ -30,6 +31,16 @@ public class AndroidMusic implements Music, OnCompletionListener {
             mediaPlayer.stop();
         mediaPlayer.release();
     }
+
+    public boolean isMute() {
+        return AndroidMusic.mute;
+    }
+
+    public void setMute(boolean isMute) {
+        AndroidMusic.mute = isMute;
+        this.pause();
+    }
+
     public boolean isLooping() {
         return mediaPlayer.isLooping();
     }
@@ -46,9 +57,10 @@ public class AndroidMusic implements Music, OnCompletionListener {
             mediaPlayer.pause();
     }
     public void play() {
-        if (mediaPlayer.isPlaying()) {
+        if (this.isMute())
             return;
-        }
+        else if (mediaPlayer.isPlaying())
+            return;
         try {
             synchronized (this) {
                 if (!isPrepared)
@@ -68,15 +80,25 @@ public class AndroidMusic implements Music, OnCompletionListener {
     public void setVolume(float volume) {
         mediaPlayer.setVolume(volume, volume);
     }
+
     public void stop() {
-        mediaPlayer.stop();
-        synchronized (this) {
-            isPrepared = false;
+        if (mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+            synchronized (this) {
+                isPrepared = false;
+            }
         }
+
     }
+
     public void onCompletion(MediaPlayer player) {
         synchronized (this) {
             isPrepared = false;
         }
+    }
+
+    public void reset() {
+        mediaPlayer.seekTo(0);
+        mediaPlayer.pause();
     }
 }

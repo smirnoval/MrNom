@@ -24,11 +24,9 @@ public class GameScreen extends Screen {
     public GameScreen(Game game) {
         super(game);
         world = new World();
-        if(Settings.soundEnabled) {
-            Assets.musicGame.setVolume(1);
-            Assets.musicGame.setLooping(true);
-            Assets.musicGame.play();
-        }
+        Assets.musicGame.setVolume(1);
+        Assets.musicGame.setLooping(true);
+        Assets.musicGame.play();
     }
 
     @Override
@@ -36,7 +34,7 @@ public class GameScreen extends Screen {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();
 
-        if(Settings.soundEnabled && Assets.musicGame.isPlaying() == false && state == GameState.Running) {
+        if(!Assets.musicGame.isPlaying() && state == GameState.Running) {
             Assets.musicGame.play();
         }
 
@@ -61,8 +59,7 @@ public class GameScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x < 128 && event.y < 128) {
-                    if(Settings.soundEnabled)
-                        Assets.click.play(1);
+                    Assets.click.play(1);
                     state = GameState.Paused;
                     return;
                 }
@@ -79,40 +76,32 @@ public class GameScreen extends Screen {
 
         world.update(deltaTime);
         if(world.gameOver) {
-            if(Settings.soundEnabled)
-                Assets.bitten.play(1);
+            Assets.bitten.play(1);
             state = GameState.GameOver;
         }
         if(oldScore != world.score) {
             oldScore = world.score;
             score = "" + oldScore;
-            if(Settings.soundEnabled)
-                Assets.eat.play(1);
+            Assets.eat.play(1);
         }
     }
 
     private void updatePaused(List<TouchEvent> touchEvents) {
-        if(Settings.soundEnabled) {
-            Assets.musicGame.pause();
-        }
+        Assets.musicGame.pause();
         int len = touchEvents.size();
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x > 160 && event.x <= 480) {
                     if(event.y > 200 && event.y <= 300) {
-                        if(Settings.soundEnabled) {
-                            Assets.click.play(1);
-                            Assets.musicGame.play();
-                        }
+                        Assets.click.play(1);
+                        Assets.musicGame.play();
                         state = GameState.Running;
                         return;
                     }
                     if(event.y > 310 && event.y < 400) {
-                        if(Settings.soundEnabled) {
-                            Assets.click.play(1);
-                            Assets.musicGame.stop();
-                        }
+                        Assets.click.play(1);
+                        Assets.musicGame.stop();
                         game.setScreen(new MainMenuScreen(game));
                         return;
                     }
@@ -128,10 +117,8 @@ public class GameScreen extends Screen {
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x >= 256 && event.x <= 384 &&
                         event.y >= 400 && event.y <= 528) {
-                    if(Settings.soundEnabled) {
-                        Assets.click.play(1);
-                        Assets.musicGame.stop();
-                    }
+                    Assets.click.play(1);
+                    Assets.musicGame.stop();
                     game.setScreen(new MainMenuScreen(game));
                     return;
                 }
@@ -262,9 +249,7 @@ public class GameScreen extends Screen {
             Settings.addScore(world.score);
             Settings.save(game.getFileIO());
         }
-        if(Settings.soundEnabled) {
-            Assets.musicGame.pause();
-        }
+        Assets.musicGame.pause();
     }
 
     @Override

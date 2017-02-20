@@ -10,11 +10,9 @@ import com.smirnov.alexander.framework.Screen;
 public class SettingsScreen extends Screen {
     public SettingsScreen(Game game) {
         super(game);
-        if(Settings.soundEnabled) {
-            Assets.musicSettings.setVolume(1);
-            Assets.musicSettings.setLooping(true);
-            Assets.musicSettings.play();
-        }
+        Assets.musicSettings.setVolume(1);
+        Assets.musicSettings.setLooping(true);
+        Assets.musicSettings.play();
     }
 
     @Override
@@ -22,7 +20,7 @@ public class SettingsScreen extends Screen {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();
 
-        if(Settings.soundEnabled && Assets.musicSettings.isPlaying() == false) {
+        if(!Assets.musicSettings.isPlaying()) {
             Assets.musicSettings.play();
         }
 
@@ -32,10 +30,8 @@ public class SettingsScreen extends Screen {
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(event.x > 512 && event.y > 820 ) {
                     game.setScreen(new MainMenuScreen(game));
-                    if(Settings.soundEnabled){
-                        Assets.click.play(1);
-                        Assets.musicSettings.stop();
-                    }
+                    Assets.click.play(1);
+                    Assets.musicSettings.stop();
                     return;
                 }
             }
@@ -52,9 +48,7 @@ public class SettingsScreen extends Screen {
 
     @Override
     public void pause() {
-        if(Settings.soundEnabled) {
-            Assets.musicSettings.pause();
-        }
+        Assets.musicSettings.pause();
     }
 
     @Override

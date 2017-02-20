@@ -10,12 +10,9 @@ import com.smirnov.alexander.framework.Screen;
 public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
         super(game);
-        if(Settings.soundEnabled) {
-            Assets.musicMainMenu.setVolume(1);
-            Assets.musicMainMenu.setLooping(true);
-            Assets.musicMainMenu.play();
-        }
-
+        Assets.musicMainMenu.setVolume(1);
+        Assets.musicMainMenu.setLooping(true);
+        Assets.musicMainMenu.play();
     }
 
     public void update(float deltaTime) {
@@ -23,7 +20,7 @@ public class MainMenuScreen extends Screen {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();
 
-        if(Settings.soundEnabled && Assets.musicMainMenu.isPlaying() == false) {
+        if (!Assets.musicMainMenu.isPlaying()) {
             Assets.musicMainMenu.play();
         }
         int len = touchEvents.size();
@@ -32,33 +29,26 @@ public class MainMenuScreen extends Screen {
             if(event.type == TouchEvent.TOUCH_UP) {
                 if(inBounds(event, 0, g.getHeight() - 128, 128, 128)) {
                     Settings.soundEnabled = !Settings.soundEnabled;
-                    if(Settings.soundEnabled)
-                        Assets.click.play(1);
-                    else if(Settings.soundEnabled == false && Assets.musicMainMenu.isPlaying())
-                        Assets.musicMainMenu.pause();
+                    Assets.click.setMute(!Assets.click.isMute());
+                    Assets.musicMainMenu.setMute(!Assets.musicMainMenu.isMute());
+                    Assets.click.play(1);
                 }
                 if(inBounds(event, 128, 440, 384, 84) ) {
                     game.setScreen(new GameScreen(game));
-                    if(Settings.soundEnabled){
-                        Assets.musicMainMenu.stop();
-                        Assets.click.play(1);
-                    }
+                    Assets.click.play(1);
+                    Assets.musicMainMenu.reset();
                     return;
                 }
                 if(inBounds(event, 128, 440 + 82, 384, 84) ) {
                     game.setScreen(new HighscoreScreen(game));
-                    if(Settings.soundEnabled){
-                        Assets.musicMainMenu.stop();
-                        Assets.click.play(1);
-                    }
+                    Assets.click.play(1);
+                    Assets.musicMainMenu.reset();
                     return;
                 }
                 if(inBounds(event, 128, 440 + 180, 384, 90) ) {
                     game.setScreen(new SettingsScreen(game));
-                    if(Settings.soundEnabled){
-                        Assets.musicMainMenu.stop();
-                        Assets.click.play(1);
-                    }
+                    Assets.click.play(1);
+                    Assets.musicMainMenu.reset();
                     return;
                 }
             }
@@ -87,15 +77,12 @@ public class MainMenuScreen extends Screen {
 
     public void pause() {
         Settings.save(game.getFileIO());
-        if(Settings.soundEnabled && Assets.musicMainMenu.isPlaying()) {
+        if (Assets.musicMainMenu.isPlaying())
             Assets.musicMainMenu.pause();
-        }
     }
 
     public void resume() {
-        if(Settings.soundEnabled) {
-            Assets.musicMainMenu.play();
-        }
+        Assets.musicMainMenu.play();
     }
 
     public void dispose() {

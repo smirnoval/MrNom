@@ -11,6 +11,10 @@ public interface Music {
 
     public void setVolume(float volume);
 
+    public boolean isMute();
+
+    public void setMute(boolean isMute);
+
     public boolean isPlaying();
 
     public boolean isStopped();
@@ -18,4 +22,6 @@ public interface Music {
     public boolean isLooping();
 
     public void dispose();
+
+    public void reset();
 }

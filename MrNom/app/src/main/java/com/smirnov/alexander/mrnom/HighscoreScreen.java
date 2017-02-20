@@ -12,12 +12,9 @@ public class HighscoreScreen extends Screen {
 
     public HighscoreScreen(Game game) {
         super(game);
-
-        if(Settings.soundEnabled) {
-            Assets.musicHighscore.setVolume(1);
-            Assets.musicHighscore.setLooping(true);
-            Assets.musicHighscore.play();
-        }
+        Assets.musicHighscore.setVolume(1);
+        Assets.musicHighscore.setLooping(true);
+        Assets.musicHighscore.play();
 
         for (int i = 0; i < 5; i++) {
             lines[i] = "" + (i + 1) + ". " + Settings.highscores[i];
@@ -29,7 +26,7 @@ public class HighscoreScreen extends Screen {
         List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
         game.getInput().getKeyEvents();
 
-        if(Settings.soundEnabled && Assets.musicHighscore.isPlaying() == false) {
+        if(!Assets.musicHighscore.isPlaying()) {
             Assets.musicHighscore.play();
         }
 
@@ -38,10 +35,8 @@ public class HighscoreScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
                 if (event.x < 128 && event.y > 820) {
-                    if(Settings.soundEnabled){
-                        Assets.click.play(1);
-                        Assets.musicHighscore.stop();
-                    }
+                    Assets.click.play(1);
+                    Assets.musicHighscore.stop();
                     game.setScreen(new MainMenuScreen(game));
                     return;
                 }
@@ -92,10 +87,7 @@ public class HighscoreScreen extends Screen {
 
     @Override
     public void pause() {
-        if(Settings.soundEnabled) {
-            Assets.musicHighscore.pause();
-        }
-
+        Assets.musicHighscore.pause();
     }
 
     @Override
