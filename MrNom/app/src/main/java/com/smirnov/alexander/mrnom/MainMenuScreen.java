@@ -26,7 +26,6 @@ public class MainMenuScreen extends Screen {
         if(Settings.soundEnabled && Assets.musicMainMenu.isPlaying() == false) {
             Assets.musicMainMenu.play();
         }
-
         int len = touchEvents.size();
         for(int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
@@ -88,7 +87,7 @@ public class MainMenuScreen extends Screen {
 
     public void pause() {
         Settings.save(game.getFileIO());
-        if(Settings.soundEnabled) {
+        if(Settings.soundEnabled && Assets.musicMainMenu.isPlaying()) {
             Assets.musicMainMenu.pause();
         }
     }

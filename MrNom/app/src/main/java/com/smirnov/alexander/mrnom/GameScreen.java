@@ -130,7 +130,7 @@ public class GameScreen extends Screen {
                         event.y >= 400 && event.y <= 528) {
                     if(Settings.soundEnabled) {
                         Assets.click.play(1);
-
+                        Assets.musicGame.stop();
                     }
                     game.setScreen(new MainMenuScreen(game));
                     return;
