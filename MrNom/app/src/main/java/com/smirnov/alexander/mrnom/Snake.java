@@ -21,14 +21,39 @@ public class Snake {
 
     public void turnLeft() {
         direction += 1;
-        if(direction > RIGHT)
+        if (direction > RIGHT)
             direction = UP;
+        if (checkBittenNeck()) {
+            direction -= 1;
+            if(direction < UP)
+                direction = RIGHT;
+        }
     }
 
     public void turnRight() {
         direction -= 1;
-        if(direction < UP)
+        if (direction < UP)
             direction = RIGHT;
+        if (checkBittenNeck()) {
+            direction += 1;
+            if (direction > RIGHT)
+                direction = UP;
+        }
+    }
+
+    public boolean checkBittenNeck() {
+        boolean check = false;
+        SnakePart head = parts.get(0);
+        SnakePart neck = parts.get(1);
+        if (direction == UP && head.y - 1 == neck.y)
+            check = true;
+        else if (direction == LEFT && head.x - 1 == neck.x)
+            check = true;
+        else if (direction == DOWN && head.y + 1 == neck.y)
+            check = true;
+        else if (direction == RIGHT && head.x + 1 == neck.x)
+            check = true;
+        return check;
     }
 
     public void eat() {
